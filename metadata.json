@@ -1,0 +1,6 @@
+{
+  "name": "Hold My Bag - IU Bloomington Bag Swap",
+  "description": "Mobile-first bag swap and storage stand near Memorial Stadium and Simon Skjodt Assembly Hall for Indiana University Bloomington events.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

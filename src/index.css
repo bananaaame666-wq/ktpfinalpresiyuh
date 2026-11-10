@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+  --color-iu-crimson: #990000;
+  --color-iu-crimson-dark: #7A0000;
+  --color-iu-cream: #FAF8F5;
+  --color-iu-cream-dark: #F0ECE1;
+}
+
+html {
+  font-family: var(--font-sans, system-ui, sans-serif);
+  scroll-behavior: smooth;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Custom scrollbar for horizontal tabs */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
