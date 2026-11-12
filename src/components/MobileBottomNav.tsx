@@ -13,7 +13,7 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
   onOpenReserve,
 }) => {
   return (
-    <div className="fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 lg:hidden safe-area-bottom shadow-lg">
+    <div className="print:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-stone-200 lg:hidden safe-area-bottom shadow-lg">
       <div className="grid grid-cols-5 items-center h-15 px-2">
         {/* Home */}
         <button
@@ -26,15 +26,15 @@ export const MobileBottomNav: React.FC<MobileBottomNavProps> = ({
           <span className="text-[10px] font-semibold mt-0.5 tracking-tight">Home</span>
         </button>
 
-        {/* Steps */}
+        {/* Why Us */}
         <button
-          onClick={() => onNavClick('how-it-works')}
+          onClick={() => onNavClick('why-us')}
           className={`flex flex-col items-center justify-center min-h-[44px] cursor-pointer transition-colors ${
-            activeTab === 'how-it-works' ? 'text-[#990000]' : 'text-stone-500 hover:text-stone-800'
+            activeTab === 'why-us' ? 'text-[#990000]' : 'text-stone-500 hover:text-stone-800'
           }`}
         >
-          <CheckCircle className="w-5 h-5" />
-          <span className="text-[10px] font-semibold mt-0.5 tracking-tight">Steps</span>
+          <HelpCircle className="w-5 h-5" />
+          <span className="text-[10px] font-semibold mt-0.5 tracking-tight">Why Us</span>
         </button>
 
         {/* Events */}

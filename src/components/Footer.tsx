@@ -8,7 +8,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenReserve }) => {
   return (
-    <footer className="bg-stone-900 text-stone-300 pt-16 pb-24 lg:pb-16 text-left">
+    <footer className="print:hidden bg-stone-900 text-stone-300 pt-16 pb-24 lg:pb-16 text-left">
       <div className="max-w-6xl mx-auto px-4 sm:px-6">
         <div className="grid grid-cols-1 md:grid-cols-12 gap-10 pb-12 border-b border-stone-800">
           
@@ -50,6 +50,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavClick, onOpenReserve }) => 
                   className="hover:text-white transition-colors cursor-pointer"
                 >
                   Home
+                </button>
+              </li>
+              <li>
+                <button
+                  onClick={() => onNavClick('why-us')}
+                  className="hover:text-amber-300 font-semibold text-amber-200 transition-colors cursor-pointer flex items-center gap-1.5"
+                >
+                  <span>Why Us (KTP Pitch Brief)</span>
                 </button>
               </li>
               <li>

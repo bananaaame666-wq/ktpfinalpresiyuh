@@ -12,6 +12,7 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onOpenR
 
   const navLinks = [
     { id: 'home', label: 'Home' },
+    { id: 'why-us', label: 'Why Us' },
     { id: 'how-it-works', label: 'How It Works' },
     { id: 'events', label: 'Events' },
     { id: 'pricing', label: 'Pricing' },
@@ -22,28 +23,39 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onOpenR
   const handleNavClick = (id: string) => {
     setActiveTab(id);
     setMobileMenuOpen(false);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (id !== 'why-us') {
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 50);
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
   return (
     <>
       {/* Top Banner: Authentic Student Venture Pitch Flag */}
-      <div className="bg-[#800000] text-amber-100 text-xs py-1.5 px-4 font-medium tracking-tight">
+      <div className="print:hidden bg-[#800000] text-amber-100 text-xs py-1.5 px-4 font-medium tracking-tight">
         <div className="max-w-6xl mx-auto flex items-center justify-between text-[11px] sm:text-xs">
           <div className="flex items-center gap-1.5 truncate">
             <span className="font-bold text-white uppercase tracking-wider text-[10px] bg-[#660000] px-1.5 py-0.5 rounded">Pitch Demo</span>
             <span className="hidden sm:inline text-amber-200">·</span>
-            <span className="truncate">IU Bloomington Student Business · No real payment or account needed</span>
+            <span className="truncate">IU Bloomington Student Business · KTP Pitch Reference</span>
           </div>
-          <span className="shrink-0 text-amber-200/90 hidden md:inline">Indiana University Campus Stand Concept</span>
+          <button
+            onClick={() => handleNavClick('why-us')}
+            className="shrink-0 text-amber-200 hover:text-white underline underline-offset-2 font-semibold cursor-pointer ml-2"
+          >
+            {activeTab === 'why-us' ? 'Viewing: Why Us Pitch Brief' : 'Why Us (5-Min Pitch Reference) →'}
+          </button>
         </div>
       </div>
 
       {/* Main Navigation Bar complying with 3-zone contract */}
-      <header className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200 shadow-xs">
+      <header className="print:hidden sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200 shadow-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-8">
           {/* Zone 1: Brand Wordmark with clean bag icon */}
           <button

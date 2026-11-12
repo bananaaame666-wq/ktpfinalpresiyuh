@@ -16,6 +16,8 @@ import { FaqSection } from './components/FaqSection';
 import { Footer } from './components/Footer';
 import { MobileBottomNav } from './components/MobileBottomNav';
 
+import { WhyUsPage } from './components/WhyUsPage';
+
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
   const [selectedEventId, setSelectedEventId] = useState<string>('commencement-2026');
@@ -24,10 +26,18 @@ export default function App() {
 
   const scrollToSection = (sectionId: string) => {
     setActiveTab(sectionId);
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (sectionId === 'why-us') {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
     }
+    setTimeout(() => {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    }, 50);
   };
 
   const handleOpenReserve = (tierId?: string) => {
@@ -45,6 +55,10 @@ export default function App() {
     scrollToSection('tracker');
   };
 
+  const handleTryDemo = () => {
+    scrollToSection('reserve');
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF8F5] text-stone-900 font-sans selection:bg-[#990000] selection:text-white">
       {/* Top Bar Contract compliant Navigation */}
@@ -55,47 +69,56 @@ export default function App() {
       />
 
       <main className="flex-1">
-        {/* Hero Section */}
-        <div id="home">
-          <Hero
-            onOpenReserve={() => handleOpenReserve()}
-            onOpenTracker={handleOpenTracker}
-            onSelectEvent={handleSelectEvent}
+        {activeTab === 'why-us' ? (
+          <WhyUsPage
+            onTryDemo={handleTryDemo}
+            onNavigateHome={() => scrollToSection('home')}
           />
-        </div>
+        ) : (
+          <>
+            {/* Hero Section */}
+            <div id="home">
+              <Hero
+                onOpenReserve={() => handleOpenReserve()}
+                onOpenTracker={handleOpenTracker}
+                onSelectEvent={handleSelectEvent}
+              />
+            </div>
 
-        {/* How It Works (4 Steps) */}
-        <HowItWorks />
+            {/* How It Works (4 Steps) */}
+            <HowItWorks />
 
-        {/* IU Bag Policy Checker (Explains the gate pain point) */}
-        <BagPolicyGuide
-          onOpenReserve={() => handleOpenReserve()}
-        />
+            {/* IU Bag Policy Checker (Explains the gate pain point) */}
+            <BagPolicyGuide
+              onOpenReserve={() => handleOpenReserve()}
+            />
 
-        {/* Upcoming Events, Stand Locations & Hours */}
-        <EventsList
-          onSelectEvent={handleSelectEvent}
-        />
+            {/* Upcoming Events, Stand Locations & Hours */}
+            <EventsList
+              onSelectEvent={handleSelectEvent}
+            />
 
-        {/* Pricing Section ($9 Swap, $35 Family, $3 Umbrella) */}
-        <PricingSection
-          onSelectTier={handleOpenReserve}
-        />
+            {/* Pricing Section ($9 Swap, $35 Family, $3 Umbrella) */}
+            <PricingSection
+              onSelectTier={handleOpenReserve}
+            />
 
-        {/* Reservation Section with Fake Confirmation & Pass */}
-        <ReservationSection
-          initialEventId={selectedEventId}
-          initialTierId={selectedTierId}
-          onViewInTracker={handleOpenTracker}
-        />
+            {/* Reservation Section with Fake Confirmation & Pass */}
+            <ReservationSection
+              initialEventId={selectedEventId}
+              initialTierId={selectedTierId}
+              onViewInTracker={handleOpenTracker}
+            />
 
-        {/* Live Bag Tracker Demo */}
-        <BagTracker
-          initialTag={activeTrackerTag}
-        />
+            {/* Live Bag Tracker Demo */}
+            <BagTracker
+              initialTag={activeTrackerTag}
+            />
 
-        {/* FAQ Section */}
-        <FaqSection />
+            {/* FAQ Section */}
+            <FaqSection />
+          </>
+        )}
       </main>
 
       {/* Footer with Student Business & Kelley School pitch credentials */}

@@ -23,3 +23,17 @@ html {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+/* Print layout optimization for 1-page executive pitch summary */
+@media print {
+  @page {
+    size: letter portrait;
+    margin: 0.3in;
+  }
+  body {
+    background-color: #ffffff !important;
+    color: #111827 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
