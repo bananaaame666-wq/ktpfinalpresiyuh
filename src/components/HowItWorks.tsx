@@ -112,7 +112,7 @@ export const HowItWorks: React.FC = () => {
                 Built-in Peace of Mind
               </div>
               <h3 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                Why thousands of IU fans trust our stand
+                How our proposed stand keeps every bag secure
               </h3>
               <p className="text-sm text-stone-600 leading-relaxed">
                 We know your bag holds personal items. Our system is engineered so no one—not even our staff—can open your bag without immediate detection.

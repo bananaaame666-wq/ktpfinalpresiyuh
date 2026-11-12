@@ -1,22 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
   Building2, 
-  AlertTriangle, 
-  Users, 
-  Layers, 
-  DollarSign, 
-  ShieldCheck, 
-  TrendingUp, 
-  Printer, 
-  ArrowRight, 
-  Clock, 
-  MapPin, 
+  ShoppingBag, 
   CheckCircle2, 
+  ExternalLink, 
+  ChevronDown, 
+  ChevronUp, 
+  ArrowRight, 
   Play, 
-  Scale, 
-  Sparkles,
-  Award,
-  ChevronRight
+  XCircle,
+  ShieldCheck,
+  Check,
+  MapPin,
+  Clock
 } from 'lucide-react';
 
 interface WhyUsPageProps {
@@ -24,740 +20,708 @@ interface WhyUsPageProps {
   onNavigateHome: () => void;
 }
 
-export const WhyUsPage: React.FC<WhyUsPageProps> = ({ onTryDemo, onNavigateHome }) => {
-  const handlePrint = () => {
-    window.print();
+export const WhyUsPage: React.FC<WhyUsPageProps> = ({ onTryDemo }) => {
+  // State for expandable reference/source drawers
+  const [sourcesOpen, setSourcesOpen] = useState<{ [key: string]: boolean }>({
+    sec1: false,
+    sec3: false,
+    sec4: false,
+    sec6: false,
+  });
+
+  const toggleSource = (key: string) => {
+    setSourcesOpen((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
   return (
-    <div className="bg-[#FAF8F5] min-h-screen">
-      {/* =========================================================================
-          SCREEN-ONLY VIEW: 5-Minute KTP Pitch Deck & Visual Reference Guide
-          ========================================================================= */}
-      <div className="print:hidden">
-        {/* Top Pitch Deck Toolbar */}
-        <div className="bg-stone-900 text-stone-200 border-b border-stone-800 py-3 px-4 sticky top-16 z-30 shadow-md">
-          <div className="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 text-xs">
-            <div className="flex items-center gap-2">
-              <span className="font-bold uppercase tracking-wider text-amber-400 bg-amber-400/10 px-2 py-0.5 rounded border border-amber-400/20">
-                KTP Pitch Reference
-              </span>
-              <span className="text-stone-400 hidden sm:inline">·</span>
-              <span className="text-stone-300 font-medium">5-Minute Executive Presentation Guide</span>
+    <div className="bg-[#FAF8F5] text-stone-900 py-10 sm:py-16 selection:bg-[#990000] selection:text-white">
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 space-y-16 sm:space-y-24 text-left">
+        
+        {/* =====================================================================
+            SECTION 1: The gate says no. Where does your bag go?
+            ===================================================================== */}
+        <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200/90 shadow-xs">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
+            The gate says no. Where does your bag go?
+          </h2>
+
+          <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-3xl mb-8">
+            “Kickoff is in ten minutes. You got dropped off at Memorial Stadium with a backpack. Security says it can’t go in, and the stadium has no bag check.”
+          </p>
+
+          {/* MAIN VISUAL: Opaque backpack beside clear tote */}
+          <div className="rounded-2xl bg-[#FAF8F5] border border-stone-200 p-6 sm:p-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+              
+              {/* Opaque Backpack Card */}
+              <div className="p-6 rounded-2xl bg-white border-2 border-stone-300 text-center flex flex-col items-center justify-center min-h-[200px]">
+                <div className="w-16 h-16 rounded-2xl bg-stone-100 text-stone-800 flex items-center justify-center mb-3">
+                  <ShoppingBag className="w-9 h-9 stroke-[2]" />
+                </div>
+                <strong className="text-lg font-bold text-stone-900 block">
+                  Standard Opaque Backpack / Purse
+                </strong>
+                <span className="text-xs font-semibold text-rose-700 uppercase tracking-wider mt-1 block">
+                  Prohibited at Stadium Gates
+                </span>
+              </div>
+
+              {/* Clear Tote Card */}
+              <div className="p-6 rounded-2xl bg-white border-2 border-[#990000] text-center flex flex-col items-center justify-center min-h-[200px]">
+                <div className="w-16 h-16 rounded-2xl bg-rose-50 text-[#990000] flex items-center justify-center mb-3">
+                  <CheckCircle2 className="w-9 h-9 stroke-[2]" />
+                </div>
+                <strong className="text-lg font-bold text-stone-900 block">
+                  12″ × 6″ × 12″ Clear Stadium Tote
+                </strong>
+                <span className="text-xs font-semibold text-emerald-700 uppercase tracking-wider mt-1 block">
+                  Permitted Inside Gate
+                </span>
+              </div>
+
             </div>
 
-            <div className="flex items-center gap-2.5">
-              <button
-                onClick={onTryDemo}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#990000] hover:bg-[#800000] text-white font-bold transition-colors cursor-pointer shadow-xs"
-              >
-                <Play className="w-3.5 h-3.5 fill-current" />
-                <span>Try the Demo</span>
-              </button>
-
-              <button
-                onClick={handlePrint}
-                className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-stone-800 hover:bg-stone-700 text-white font-semibold transition-colors cursor-pointer border border-stone-700"
-                title="Print 1-page typed executive summary"
-              >
-                <Printer className="w-3.5 h-3.5 text-stone-300" />
-                <span>Print 1-Page Summary</span>
-              </button>
+            {/* Direct Line Under Visual */}
+            <div className="mt-6 pt-5 border-t border-stone-200 text-center md:text-left">
+              <p className="text-base sm:text-lg font-bold text-stone-900 leading-snug">
+                “Buying a clear tote gives you something to carry inside. You still need somewhere to leave your backpack.”
+              </p>
             </div>
           </div>
-        </div>
 
-        {/* Pitch Hero Header */}
-        <section className="pt-8 pb-6 px-4 sm:px-6 max-w-5xl mx-auto">
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4 pb-6 border-b border-stone-200">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-[#990000] uppercase tracking-wider mb-1.5">
-                <span>Hold My Bag</span>
-                <span>·</span>
-                <span>Why Us · Pitch Deck Outline</span>
-              </div>
-              <h1 className="text-3xl sm:text-4xl font-extrabold text-stone-900 tracking-tight">
-                Why Hold My Bag?
-              </h1>
-              <p className="text-base text-stone-600 mt-2 max-w-2xl">
-                A 5-minute executive briefing on solving Indiana University's stadium clear-bag dilemma with high-margin student logistics.
-              </p>
-            </div>
+          {/* Expandable Sources */}
+          <div className="mt-4 pt-2">
+            <button
+              onClick={() => toggleSource('sec1')}
+              className="text-xs font-semibold text-stone-500 hover:text-stone-800 inline-flex items-center gap-1 cursor-pointer"
+            >
+              <span>{sourcesOpen.sec1 ? 'Hide policy sources' : 'View policy sources'}</span>
+              {sourcesOpen.sec1 ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </button>
 
-            {/* Presentation Pacing Guide */}
-            <div className="bg-white p-3.5 rounded-2xl border border-stone-200 text-xs shadow-xs shrink-0 max-w-xs">
-              <div className="flex items-center justify-between text-stone-500 font-semibold mb-1">
-                <span className="flex items-center gap-1 text-[#990000]">
-                  <Clock className="w-3.5 h-3.5" />
-                  Target: 5 Minutes
-                </span>
-                <span className="font-mono text-stone-700">7 Core Points</span>
+            {sourcesOpen.sec1 && (
+              <div className="mt-2.5 p-3.5 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-600 flex flex-wrap gap-x-6 gap-y-2">
+                <a
+                  href="https://iuhoosiers.com/sports/2017/8/14/bag-policies"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#990000] hover:text-[#800000] font-semibold underline underline-offset-2 flex items-center gap-1"
+                >
+                  <span>IU’s bag policy</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
+                <a
+                  href="https://iuhoosiers.com/sports/2025/9/8/merchants-bank-field-at-memorial-stadium-policies"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-[#990000] hover:text-[#800000] font-semibold underline underline-offset-2 flex items-center gap-1"
+                >
+                  <span>Memorial Stadium’s policy</span>
+                  <ExternalLink className="w-3 h-3" />
+                </a>
               </div>
-              <p className="text-[11px] text-stone-500 leading-tight">
-                Quick-scan headings and quantitative evidence structured in logical investor order.
-              </p>
-            </div>
+            )}
           </div>
         </section>
 
-        {/* Main 7 Sections Content */}
-        <main className="max-w-5xl mx-auto px-4 sm:px-6 pb-20 space-y-8">
-          
-          {/* =====================================================================
-              1. BUSINESS NAME AND CONCEPT
-              ===================================================================== */}
-          <section id="why-1" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  01
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Business Name & Concept
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">0:00 – 0:40</span>
-            </div>
 
-            <div className="p-4 rounded-2xl bg-amber-50/60 border border-amber-200/80 mb-5 text-stone-800">
-              <p className="text-base sm:text-lg font-bold text-stone-900 leading-snug">
-                <strong className="text-[#990000]">Hold My Bag</strong> is a mobile, pop-up stadium-gate bag check and loaner clear-bag service that rescues visitors, students, and families turned away by strict security policies outside Indiana University Bloomington athletic and commencement venues.
+        {/* =====================================================================
+            SECTION 2: Hold My Bag gets you to the game in one stop.
+            ===================================================================== */}
+        <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200/90 shadow-xs">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
+            Hold My Bag gets you to the game in one stop.
+          </h2>
+
+          <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-3xl mb-8">
+            Hold My Bag is a proposed <strong className="text-stone-900 font-bold">$9 staffed bag check with a clear loaner tote near the gate</strong>.
+          </p>
+
+          {/* Three Big Steps */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8 text-center sm:text-left">
+            <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-stone-200">
+              <span className="text-xs font-mono font-bold text-[#990000] uppercase tracking-wider block mb-1">
+                Step 1
+              </span>
+              <strong className="text-lg font-black text-stone-900 block">
+                Check your bag
+              </strong>
+              <p className="text-xs text-stone-600 mt-1">
+                Staff securely seals your bag with a numbered tamper tie outside the gate.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs sm:text-sm">
-              <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span className="text-stone-400 uppercase tracking-wider text-[10px] font-bold block mb-1">
-                  What It Does
-                </span>
-                <p className="font-semibold text-stone-800">
-                  Instant bag swap & secure holding: we hold non-compliant bags and lend a regulation 12"×6"×12" clear tote.
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span className="text-stone-400 uppercase tracking-wider text-[10px] font-bold block mb-1">
-                  Who It Serves
-                </span>
-                <p className="font-semibold text-stone-800">
-                  Visiting parents, alumni, families with diaper bags, and students carrying backpacks or umbrellas.
-                </p>
-              </div>
-
-              <div className="p-3.5 rounded-xl bg-stone-50 border border-stone-200/70">
-                <span className="text-stone-400 uppercase tracking-wider text-[10px] font-bold block mb-1">
-                  Where It Starts
-                </span>
-                <p className="font-semibold text-stone-800">
-                  Memorial Stadium (Gate E) and Simon Skjodt Assembly Hall (South Plaza) in Bloomington, Indiana.
-                </p>
-              </div>
-            </div>
-          </section>
-
-          {/* =====================================================================
-              2. PROBLEM AND OPPORTUNITY
-              ===================================================================== */}
-          <section id="why-2" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  02
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Problem & Opportunity
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">0:40 – 1:30</span>
+            <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-stone-200">
+              <span className="text-xs font-mono font-bold text-[#990000] uppercase tracking-wider block mb-1">
+                Step 2
+              </span>
+              <strong className="text-lg font-black text-stone-900 block">
+                Borrow a clear tote
+              </strong>
+              <p className="text-xs text-stone-600 mt-1">
+                Carry your phone, wallet, keys, and medications straight inside.
+              </p>
             </div>
 
-            {/* Bloomington Scenario Story */}
-            <div className="space-y-4 text-sm text-stone-700">
-              <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200">
-                <span className="text-xs font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  Specific Bloomington Scenario
+            <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-stone-200">
+              <span className="text-xs font-mono font-bold text-[#990000] uppercase tracking-wider block mb-1">
+                Step 3
+              </span>
+              <strong className="text-lg font-black text-stone-900 block">
+                Pick up with your tag and ID
+              </strong>
+              <p className="text-xs text-stone-600 mt-1">
+                Return the loaner tote after the game and pick up your bag in 30 seconds.
+              </p>
+            </div>
+          </div>
+
+          {/* MAIN VISUAL: Digital Claim Tag + Try the Demo Button Beside It */}
+          <div className="rounded-2xl bg-stone-900 text-white p-6 sm:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            {/* Visual Claim Tag Card */}
+            <div className="w-full md:w-80 rounded-2xl bg-[#FAF8F5] text-stone-900 p-5 border-2 border-stone-300 shadow-md text-left">
+              <div className="flex items-center justify-between border-b border-stone-200 pb-2 mb-2">
+                <div>
+                  <span className="text-[10px] font-bold text-stone-400 uppercase tracking-wider block">
+                    Claim Tag
+                  </span>
+                  <span className="text-2xl font-black font-mono text-[#990000]">
+                    #IU-4082
+                  </span>
+                </div>
+                <span className="text-[10px] text-emerald-800 font-bold bg-emerald-100 px-2 py-0.5 rounded-full">
+                  Safe in Storage
                 </span>
-                <p className="leading-relaxed">
-                  It's Saturday morning in Bloomington. A grandmother and mother travel four hours to see their daughter graduate at Simon Skjodt Assembly Hall (or attend a sellout IU vs. Michigan game at Memorial Stadium). At the gate turnstiles, event security points to the mother’s leather shoulder purse and diaper bag: <em>"Bags larger than 4.5"×6.5" and all backpacks are prohibited. You cannot enter."</em>
-                </p>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="p-4 rounded-2xl bg-rose-50/70 border border-rose-200">
-                  <h4 className="text-xs font-bold text-rose-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <AlertTriangle className="w-4 h-4 text-rose-600" />
-                    What Makes This Difficult Today
-                  </h4>
-                  <ul className="space-y-1.5 text-xs text-stone-700 leading-relaxed">
-                    <li>• <strong>Zero venue storage:</strong> IU Athletics and Assembly Hall have zero on-site public lockers or bag checks due to security liability and staffing constraints.</li>
-                    <li>• <strong>Brutal walk:</strong> Campus event parking lots (Tenth & Fee or Highway 45/46 bypass grass) are a 20-30 minute walk away. Walking back means missing kickoff or their graduate walking across the stage.</li>
-                    <li>• <strong>Desperation hacks:</strong> Guests hide purses under parked cars, in bushes, or discard expensive bags and umbrellas into venue trash bins.</li>
-                  </ul>
+              <div className="space-y-1 text-xs text-stone-700">
+                <div className="flex justify-between">
+                  <span className="text-stone-400">Tamper Seal:</span>
+                  <strong className="font-mono text-stone-900">#ST-99410</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-400">Stand Location:</span>
+                  <strong className="text-stone-900">Near Gate E</strong>
+                </div>
+                <div className="flex justify-between">
+                  <span className="text-stone-400">Pickup Rule:</span>
+                  <strong className="text-stone-900">Matching ID Required</strong>
+                </div>
+              </div>
+            </div>
+
+            {/* Try the Demo Callout & Button Beside the Tag */}
+            <div className="flex-1 space-y-3 text-center md:text-left">
+              <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
+                Try the interactive prototype
+              </h3>
+              <p className="text-sm text-stone-300 leading-relaxed max-w-md">
+                Experience the working reservation form, digital barcode claim pass, and real-time bag tracker created for this demo.
+              </p>
+              <div>
+                <button
+                  onClick={onTryDemo}
+                  className="h-12 px-6 rounded-xl bg-[#990000] hover:bg-[#800000] active:scale-[0.98] text-white font-bold text-sm transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer mx-auto md:mx-0"
+                >
+                  <Play className="w-4 h-4 fill-current" />
+                  <span>Try the Demo</span>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+
+        {/* =====================================================================
+            SECTION 3: Who needs it?
+            ===================================================================== */}
+        <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200/90 shadow-xs">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
+            Who needs it?
+          </h2>
+
+          <p className="text-base sm:text-lg font-bold text-stone-900 leading-relaxed max-w-3xl mb-8">
+            “Fans who arrive with a noncompliant bag and can’t quickly get back to a car or hotel.”
+          </p>
+
+          {/* MAIN VISUAL: Two Large Numbers Side by Side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+            
+            {/* Number 1: 51,184 */}
+            <div className="p-8 rounded-2xl bg-[#FAF8F5] border border-stone-200 text-center md:text-left flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#990000] block mb-2">
+                  Local crowd size
+                </span>
+                <div className="text-5xl sm:text-6xl lg:text-7xl font-black font-mono text-stone-900 tracking-tight leading-none">
+                  51,184
+                </div>
+              </div>
+              <p className="text-sm text-stone-600 mt-4 font-medium">
+                Average attendance at IU home football games in 2025.
+              </p>
+            </div>
+
+            {/* Number 2: 400+ */}
+            <div className="p-8 rounded-2xl bg-[#FAF8F5] border border-stone-200 text-center md:text-left flex flex-col justify-between">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-[#990000] block mb-2">
+                  Storage use at another venue
+                </span>
+                <div className="text-5xl sm:text-6xl lg:text-7xl font-black font-mono text-stone-900 tracking-tight leading-none">
+                  400+
+                </div>
+              </div>
+              <p className="text-sm text-stone-600 mt-4 font-medium">
+                Bags stored on one Chelsea matchday.
+              </p>
+            </div>
+
+          </div>
+
+          {/* Real Omaha concert example */}
+          <div className="p-4 rounded-xl bg-amber-50/70 border border-amber-200 text-stone-800 text-sm">
+            <span className="font-bold text-amber-900 block mb-1">What happens without a staffed service:</span>
+            <p className="leading-relaxed">
+              “At a 2024 Omaha concert, two attendees reported their purses missing after leaving them near security.”
+            </p>
+          </div>
+
+          {/* Expandable Sources */}
+          <div className="mt-4 pt-2">
+            <button
+              onClick={() => toggleSource('sec3')}
+              className="text-xs font-semibold text-stone-500 hover:text-stone-800 inline-flex items-center gap-1 cursor-pointer"
+            >
+              <span>{sourcesOpen.sec3 ? 'Hide attendance & news sources' : 'View attendance & news sources'}</span>
+              {sourcesOpen.sec3 ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </button>
+
+            {sourcesOpen.sec3 && (
+              <div className="mt-2.5 p-3.5 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-600 space-y-2">
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-stone-700">IU 2025 Average Attendance:</span>
+                  <a
+                    href="https://iuhoosiers.com/staff-directory/Scott-Dolson/2"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#990000] hover:text-[#800000] underline underline-offset-2 flex items-center gap-1 font-medium"
+                  >
+                    <span>IU Athletics (Scott Dolson bio)</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
                 </div>
 
-                <div className="p-4 rounded-2xl bg-emerald-50/70 border border-emerald-200">
-                  <h4 className="text-xs font-bold text-emerald-800 uppercase tracking-wider mb-2 flex items-center gap-1.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    The High-Value Opportunity Created
-                  </h4>
-                  <p className="text-xs text-stone-700 leading-relaxed">
-                    A dedicated, low-cost pop-up stand positioned <strong>40 steps outside the gate</strong> captures customers at their moment of peak frustration and urgency. We convert an immediate gate crisis into a seamless 60-second transaction with instant customer gratitude and near-zero price sensitivity.
-                  </p>
-                  <div className="mt-3 pt-2 border-t border-emerald-200/80 text-[11px] font-mono font-bold text-emerald-900">
-                    Estimated 300 to 900+ rejected bags per sellout IU game day.
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-stone-700">Chelsea Matchday Storage:</span>
+                  <a
+                    href="https://chelseasupportersgroup.net/2022/12/fans-forum-minutes-21/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#990000] hover:text-[#800000] underline underline-offset-2 flex items-center gap-1 font-medium"
+                  >
+                    <span>Chelsea Fans’ Forum minutes</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+
+                <div className="flex items-center gap-2">
+                  <span className="font-bold text-stone-700">Omaha Concert Bag Incident:</span>
+                  <a
+                    href="https://www.wowt.com/2024/06/13/omaha-concert-goers-claim-chi-health-center-staff-wrongfully-threw-out-purses/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#990000] hover:text-[#800000] underline underline-offset-2 flex items-center gap-1 font-medium"
+                  >
+                    <span>WOWT Omaha report</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+
+        {/* =====================================================================
+            SECTION 4: 35 paid swaps cover modeled game-day costs.
+            ===================================================================== */}
+        <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200/90 shadow-xs">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
+            35 paid swaps cover modeled game-day costs.
+          </h2>
+
+          <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-3xl mb-8">
+            A small stand breaks even quickly on game-day variable costs.
+          </p>
+
+          {/* MAIN VISUAL: Break-even Chart with Visible Zero Line */}
+          <div className="rounded-2xl bg-[#FAF8F5] border border-stone-200 p-6 sm:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 pb-4 border-b border-stone-200">
+              <div>
+                <h3 className="text-xl sm:text-2xl font-black text-stone-900 tracking-tight">
+                  “What’s left after modeled game-day costs?”
+                </h3>
+                <span className="text-xs text-stone-500 font-medium">
+                  Direct net return across 4 swap volumes
+                </span>
+              </div>
+
+              {/* Pilot Target Highlight Callout */}
+              <div className="bg-emerald-50 border border-emerald-300 px-3.5 py-1.5 rounded-xl text-xs font-bold text-emerald-900">
+                <span>Proposed pilot target: <strong>50 swaps</strong> ($450 sales)</span>
+              </div>
+            </div>
+
+            {/* The 4-Column Bar Visual with Explicit Visible Zero Line */}
+            <div className="relative pt-8 pb-4 max-w-3xl mx-auto">
+              
+              {/* 4 Bars Grid */}
+              <div className="grid grid-cols-4 gap-3 sm:gap-6 text-center items-end h-64 relative z-10">
+                
+                {/* Bar 1: 25 swaps -> -$82 */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <div className="h-[135px] flex items-end justify-center pb-2">
+                    <span className="text-xs font-bold text-stone-400 font-mono">$225 sales</span>
+                  </div>
+                  <div className="w-full h-0.5 bg-stone-500" />
+                  <div className="w-14 sm:w-20 bg-rose-500 rounded-b-xl h-[55px] flex items-center justify-center text-white shadow-xs">
+                    <span className="text-xs font-black font-mono">−$82</span>
+                  </div>
+                  <div className="mt-3">
+                    <strong className="text-xs sm:text-sm font-black text-stone-900 block font-mono">
+                      25 swaps → −$82
+                    </strong>
                   </div>
                 </div>
+
+                {/* Bar 2: 35 swaps -> about $0 */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <div className="h-[135px] flex items-end justify-center pb-2">
+                    <span className="text-xs font-bold text-stone-500 font-mono">$315 sales</span>
+                  </div>
+                  <div className="w-full h-0.5 bg-stone-500 relative">
+                    <div className="w-3 h-3 rounded-full bg-stone-800 absolute left-1/2 -translate-x-1/2 -top-1.5" />
+                  </div>
+                  <div className="h-[55px] flex items-start justify-center pt-2">
+                    <span className="text-[11px] font-bold text-stone-500 font-mono">Break-even</span>
+                  </div>
+                  <div className="mt-3">
+                    <strong className="text-xs sm:text-sm font-black text-stone-900 block font-mono">
+                      35 swaps → about $0
+                    </strong>
+                  </div>
+                </div>
+
+                {/* Bar 3: 50 swaps -> +$123 (Target Highlight) */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <div className="flex flex-col items-center justify-end h-[135px]">
+                    <span className="text-xs font-bold text-emerald-800 font-mono mb-1">
+                      $450 in sales
+                    </span>
+                    <div className="w-14 sm:w-20 bg-emerald-600 rounded-t-xl h-[70px] flex items-center justify-center text-white shadow-xs ring-4 ring-emerald-200">
+                      <span className="text-xs font-black font-mono">+$123</span>
+                    </div>
+                  </div>
+                  <div className="w-full h-0.5 bg-stone-500" />
+                  <div className="h-[55px] flex items-start justify-center pt-2">
+                    <span className="text-[10px] font-bold text-emerald-800 uppercase bg-emerald-100 px-1.5 py-0.5 rounded">
+                      Pilot Target
+                    </span>
+                  </div>
+                  <div className="mt-3">
+                    <strong className="text-xs sm:text-sm font-black text-emerald-900 block font-mono">
+                      50 swaps → +$123
+                    </strong>
+                  </div>
+                </div>
+
+                {/* Bar 4: 75 swaps -> +$329 */}
+                <div className="flex flex-col items-center justify-end h-full">
+                  <div className="flex flex-col items-center justify-end h-[135px]">
+                    <span className="text-xs font-bold text-stone-600 font-mono mb-1">$675 sales</span>
+                    <div className="w-14 sm:w-20 bg-[#990000] rounded-t-xl h-[120px] flex items-center justify-center text-white shadow-xs">
+                      <span className="text-xs font-black font-mono">+$329</span>
+                    </div>
+                  </div>
+                  <div className="w-full h-0.5 bg-stone-500" />
+                  <div className="h-[55px]" />
+                  <div className="mt-3">
+                    <strong className="text-xs sm:text-sm font-black text-stone-900 block font-mono">
+                      75 swaps → +$329
+                    </strong>
+                  </div>
+                </div>
+
+              </div>
+
+              {/* Direct Zero Line Label */}
+              <div className="absolute top-[156px] left-0 right-0 border-t-2 border-stone-400 border-dashed pointer-events-none flex items-center justify-between px-1">
+                <span className="text-[10px] font-mono font-bold text-stone-600 bg-[#FAF8F5] px-1">
+                  $0 Baseline
+                </span>
+                <span className="text-[10px] font-mono font-bold text-stone-600 bg-[#FAF8F5] px-1">
+                  Covers Event Costs
+                </span>
               </div>
             </div>
-          </section>
+          </div>
 
-          {/* =====================================================================
-              3. TARGET CUSTOMER AND MARKET
-              ===================================================================== */}
-          <section id="why-3" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  03
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Target Customer & Market
-                </h2>
+          {/* Expandable Notes for Detailed Model Assumptions */}
+          <div className="mt-4 pt-2">
+            <button
+              onClick={() => toggleSource('sec4')}
+              className="text-xs font-semibold text-stone-500 hover:text-stone-800 inline-flex items-center gap-1 cursor-pointer"
+            >
+              <span>{sourcesOpen.sec4 ? 'Hide modeled cost assumptions' : 'View modeled cost assumptions'}</span>
+              {sourcesOpen.sec4 ? <ChevronUp className="w-3.5 h-3.5" /> : <ChevronDown className="w-3.5 h-3.5" />}
+            </button>
+
+            {sourcesOpen.sec4 && (
+              <div className="mt-2.5 p-4 rounded-xl bg-stone-50 border border-stone-200 text-xs text-stone-700 space-y-2">
+                <ul className="space-y-1.5 list-disc list-inside">
+                  <li><strong>$9 per standard swap</strong>: Base price per bag hold with loaner clear tote included.</li>
+                  <li><strong>$287 fixed per event</strong>: Modeled as $192 staffing (2 student attendants @ $16/hr × 6 hrs) + $95 estimated insurance rider.</li>
+                  <li><strong>About $0.79 per swap</strong>: Estimated at $0.50 for supplies & loaner tote wear + $0.29 card processing fees (based on 2.7% + $0.05 in-person fee).</li>
+                  <li><strong>Exclusions</strong>: Startup equipment, employer payroll taxes/costs, and any university venue fee are outside this estimate. (Family pack and umbrella add-ons are kept in the main Pricing section).</li>
+                </ul>
+
+                <div className="pt-2 border-t border-stone-200">
+                  <a
+                    href="https://stripe.com/pricing"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#990000] hover:text-[#800000] font-semibold underline underline-offset-2 flex items-center gap-1"
+                  >
+                    <span>Stripe in-person card pricing</span>
+                    <ExternalLink className="w-3 h-3" />
+                  </a>
+                </div>
               </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">1:30 – 2:15</span>
+            )}
+          </div>
+        </section>
+
+
+        {/* =====================================================================
+            SECTION 5: One Bloomington game. One staffed stand.
+            ===================================================================== */}
+        <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200/90 shadow-xs">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
+            One Bloomington game. One staffed stand.
+          </h2>
+
+          <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-3xl mb-8">
+            Proposed pilot at an approved location near Memorial Stadium.
+          </p>
+
+          {/* MAIN VISUAL: Three Large Labels */}
+          <div className="rounded-2xl bg-stone-900 text-white p-6 sm:p-8 mb-6">
+            <span className="text-xs font-mono font-bold uppercase tracking-wider text-amber-400 block mb-4">
+              Pilot Roadmap
+            </span>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
+              <div className="p-5 rounded-xl bg-stone-800/90 border border-stone-700">
+                <span className="text-stone-400 uppercase tracking-wider text-[11px] font-bold block mb-1">
+                  Metric 1
+                </span>
+                <strong className="text-2xl sm:text-3xl font-black text-white block">
+                  Paid swaps
+                </strong>
+                <span className="text-xs text-stone-400 block mt-1">
+                  Validates real customer demand
+                </span>
+              </div>
+
+              <div className="p-5 rounded-xl bg-stone-800/90 border border-stone-700">
+                <span className="text-stone-400 uppercase tracking-wider text-[11px] font-bold block mb-1">
+                  Metric 2
+                </span>
+                <strong className="text-2xl sm:text-3xl font-black text-white block">
+                  Time fans save
+                </strong>
+                <span className="text-xs text-stone-400 block mt-1">
+                  Compared to walking back to cars
+                </span>
+              </div>
+
+              <div className="p-5 rounded-xl bg-stone-800/90 border border-stone-700">
+                <span className="text-stone-400 uppercase tracking-wider text-[11px] font-bold block mb-1">
+                  Metric 3
+                </span>
+                <strong className="text-2xl sm:text-3xl font-black text-white block">
+                  Pickup wait
+                </strong>
+                <span className="text-xs text-stone-400 block mt-1">
+                  Tests rapid post-game retrieval speed
+                </span>
+              </div>
             </div>
+          </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4 text-xs sm:text-sm">
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-                <span className="text-[10px] font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  1st Customer Group
-                </span>
-                <h4 className="font-bold text-stone-900 mb-1">Visiting Families & Parents</h4>
-                <p className="text-stone-600 text-xs leading-relaxed">
-                  Out-of-town visitors attending Commencement, Family Weekend, and non-student alumni carrying daily purses, camera cases, and diaper bags.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-                <span className="text-[10px] font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  When They Use It
-                </span>
-                <h4 className="font-bold text-stone-900 mb-1">Gate Arrival Window</h4>
-                <p className="text-stone-600 text-xs leading-relaxed">
-                  Between 90 minutes and 15 minutes before event start time, right when security turnstile screeners enforce bag size restrictions.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-                <span className="text-[10px] font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  Why Bloomington First
-                </span>
-                <h4 className="font-bold text-stone-900 mb-1">Concentrated Event Footprint</h4>
-                <p className="text-stone-600 text-xs leading-relaxed">
-                  Memorial Stadium (52,000+), Assembly Hall (17,222), Commencement (17,000+), and Little 500 (25,000+) create predictable massive crowds with zero locker alternatives.
-                </p>
-              </div>
-            </div>
-
-            {/* Evidence & Hypotheses Tagging */}
-            <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 text-xs space-y-2">
-              <div className="flex items-start gap-2">
-                <span className="bg-stone-200 text-stone-800 font-bold px-1.5 py-0.5 rounded text-[10px] uppercase shrink-0 mt-0.5">
-                  Demand Evidence
-                </span>
-                <span className="text-stone-700">
-                  IU Athletics bag policy enforcement data logs hundreds of gate rejections per home football and basketball game; gate staff report frequent guest conflict and abandoned bags outside turnstiles.
-                </span>
-              </div>
-
-              <div className="flex items-start gap-2">
-                <span className="bg-amber-100 text-amber-900 border border-amber-300 font-bold px-1.5 py-0.5 rounded text-[10px] uppercase shrink-0 mt-0.5">
-                  To Be Tested in Pilot
-                </span>
-                <span className="text-stone-700">
-                  1) Walk-up spontaneous capture rate vs. advance online QR reservation rate; 2) Customer price elasticity ($9 vs. $12); 3) Post-event pickup queue throughput bottleneck.
-                </span>
-              </div>
-            </div>
-          </section>
-
-          {/* =====================================================================
-              4. CORE PRODUCT OR SERVICE
-              ===================================================================== */}
-          <section id="why-4" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  04
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Core Product or Service
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">2:15 – 3:00</span>
-            </div>
-
-            <p className="text-sm text-stone-600 mb-4">
-              Hold My Bag provides an end-to-end bag rescue service with full physical and digital chain-of-custody tracking:
+          {/* NME and IU Connection Line */}
+          <div className="p-5 rounded-2xl bg-[#FAF8F5] border border-stone-200">
+            <p className="text-base sm:text-lg font-bold text-stone-900 leading-snug">
+              “I built a reservation and claim-tag prototype. The pilot would test whether fans will pay and whether two attendants can return bags quickly.”
             </p>
+          </div>
+        </section>
 
-            {/* 4 Steps Visual Flow */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 mb-6 text-xs">
-              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                <span className="font-mono font-bold text-[#990000] block text-sm mb-1">Step 1: Locate Stand</span>
-                <strong className="text-stone-900 block mb-1">Pop-Up Outside Gate</strong>
-                <p className="text-stone-600 text-[11px]">Walk 40 steps from gate turnstiles to our branded crimson canopy tent.</p>
-              </div>
 
-              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                <span className="font-mono font-bold text-[#990000] block text-sm mb-1">Step 2: Transfer</span>
-                <strong className="text-stone-900 block mb-1">Loaner Clear Bag</strong>
-                <p className="text-stone-600 text-[11px]">Move phone, wallet, keys & meds into our provided 12"×6"×12" regulation tote.</p>
-              </div>
+        {/* =====================================================================
+            SECTION 6: Why Hold My Bag over the alternatives?
+            ===================================================================== */}
+        <section className="bg-white rounded-3xl p-6 sm:p-10 border border-stone-200/90 shadow-xs">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-stone-900 tracking-tight leading-tight mb-3">
+            Why Hold My Bag over the alternatives?
+          </h2>
 
-              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                <span className="font-mono font-bold text-[#990000] block text-sm mb-1">Step 3: Secure & Tag</span>
-                <strong className="text-stone-900 block mb-1">Tamper Seal & Intake</strong>
-                <p className="text-stone-600 text-[11px]">Bag is locked with a serial zip tie, photographed, and customer gets SMS claim tag.</p>
-              </div>
+          <p className="text-base sm:text-lg text-stone-700 leading-relaxed max-w-3xl mb-8">
+            Comparing game-day choices fans face when turned away at the gate.
+          </p>
 
-              <div className="p-3.5 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                <span className="font-mono font-bold text-[#990000] block text-sm mb-1">Step 4: Rapid Retrieval</span>
-                <strong className="text-stone-900 block mb-1">ID-Matched Return</strong>
-                <p className="text-stone-600 text-[11px]">Return loaner tote post-game, show ID, staff cuts tamper seal, receive bag.</p>
-              </div>
-            </div>
+          {/* MAIN VISUAL: Compact Comparison Table with Hold My Bag Row Highlighted */}
+          <div className="overflow-x-auto rounded-2xl border border-stone-200 mb-6">
+            <table className="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr className="bg-stone-100/80 border-b border-stone-200 text-stone-700">
+                  <th className="py-3 px-4 font-bold uppercase tracking-wider w-1/4">Option</th>
+                  <th className="py-3 px-4 font-bold uppercase tracking-wider w-1/3">What the fan gets</th>
+                  <th className="py-3 px-4 font-bold uppercase tracking-wider">Trade-off</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-stone-200 bg-white">
+                
+                {/* Row 1: Return to the car */}
+                <tr className="hover:bg-stone-50">
+                  <td className="py-3.5 px-4 font-bold text-stone-900">
+                    Return to the car
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-700">
+                    A place to leave the bag if they drove
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-600">
+                    A round trip before entering
+                  </td>
+                </tr>
 
-            {/* Interactive Callout Button */}
-            <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="text-xs text-stone-600">
-                <strong className="text-stone-900 block text-sm">Experience the complete customer flow</strong>
-                <span>Try the live reservation flow, pass generation, and bag tracker simulator built for this pitch.</span>
-              </div>
-              <button
-                onClick={onTryDemo}
-                className="h-11 px-5 rounded-xl bg-[#990000] hover:bg-[#800000] text-white font-bold text-xs sm:text-sm flex items-center gap-2 transition-colors cursor-pointer shrink-0 shadow-xs"
-              >
-                <Play className="w-4 h-4 fill-current" />
-                <span>Try the Demo</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
-          </section>
+                {/* Row 2: Buy an IU clear tote */}
+                <tr className="hover:bg-stone-50">
+                  <td className="py-3.5 px-4 font-bold text-stone-900">
+                    Buy an IU clear tote
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-700">
+                    A compliant bag for essentials
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-600">
+                    Still needs somewhere to leave the original bag
+                  </td>
+                </tr>
 
-          {/* =====================================================================
-              5. BUSINESS MODEL
-              ===================================================================== */}
-          <section id="why-5" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  05
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Business Model & Unit Economics
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">3:00 – 3:45</span>
-            </div>
+                {/* Row 3: Stadium locker (other cities) */}
+                <tr className="hover:bg-stone-50">
+                  <td className="py-3.5 px-4 font-bold text-stone-900">
+                    Stadium locker
+                    <span className="block text-[11px] font-normal text-stone-400">Comparison from other cities</span>
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-700">
+                    <strong>$10</strong> game-day storage at Soldier Field or Q2 Stadium
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-600">
+                    A separate clear bag if the fan wants to carry essentials
+                  </td>
+                </tr>
 
-            {/* Revenue Streams Table */}
-            <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-stone-700">
-                  Revenue Streams <span className="text-[#990000]">[PROPOSED PRICING]</span>
-                </h4>
-                <span className="text-[11px] text-stone-500">Pay via Card, Apple Pay, or Venmo</span>
-              </div>
+                {/* Row 4: Bounce (other cities) */}
+                <tr className="hover:bg-stone-50">
+                  <td className="py-3.5 px-4 font-bold text-stone-900">
+                    Bounce
+                    <span className="block text-[11px] font-normal text-stone-400">Comparison from other cities</span>
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-700">
+                    Partner-location storage <strong>from $4.95/day in Indianapolis</strong>
+                  </td>
+                  <td className="py-3.5 px-4 text-stone-600">
+                    The fan needs a convenient drop-off location and a separate clear bag if needed
+                  </td>
+                </tr>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                  <span className="text-stone-500 block text-[11px]">Single Swap</span>
-                  <strong className="text-base font-bold text-stone-900 font-mono">$9 / bag</strong>
-                  <span className="text-[10px] text-stone-500 block mt-0.5">Loaner clear bag + hold</span>
-                </div>
+                {/* Row 5: Hold My Bag (Highlighted) */}
+                <tr className="bg-[#990000]/10 border-2 border-[#990000]">
+                  <td className="py-4 px-4 font-black text-[#990000] text-sm sm:text-base">
+                    Hold My Bag
+                  </td>
+                  <td className="py-4 px-4 font-bold text-stone-900">
+                    Proposed $9 for staffed storage and a clear loaner tote in one stop near the gate
+                  </td>
+                  <td className="py-4 px-4 font-bold text-[#990000]">
+                    Return to the same stand with your tag and ID
+                  </td>
+                </tr>
 
-                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                  <span className="text-stone-500 block text-[11px]">Family Pack</span>
-                  <strong className="text-base font-bold text-stone-900 font-mono">$35 / 5 bags</strong>
-                  <span className="text-[10px] text-stone-500 block mt-0.5">Express family intake</span>
-                </div>
+              </tbody>
+            </table>
+          </div>
 
-                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                  <span className="text-stone-500 block text-[11px]">Umbrella Hold</span>
-                  <strong className="text-base font-bold text-stone-900 font-mono">$3 / item</strong>
-                  <span className="text-[10px] text-stone-500 block mt-0.5">Dry covered umbrella rack</span>
-                </div>
+          {/* Sources and city comparison links below table */}
+          <div className="pt-2 pb-6 border-b border-stone-200 flex flex-wrap items-center gap-x-6 gap-y-2 text-xs text-stone-500">
+            <span className="font-semibold text-stone-700">Other city benchmarks:</span>
+            <a
+              href="https://www.chicagobears.com/game-day/az-guide"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#990000] hover:text-[#800000] font-semibold underline underline-offset-2 flex items-center gap-1"
+            >
+              <span>Soldier Field</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <span aria-hidden="true">·</span>
+            <a
+              href="https://www.austinfc.com/stadium/bag-policy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#990000] hover:text-[#800000] font-semibold underline underline-offset-2 flex items-center gap-1"
+            >
+              <span>Q2 Stadium</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+            <span aria-hidden="true">·</span>
+            <a
+              href="https://bounce.com/luggage-storage/indianapolis"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[#990000] hover:text-[#800000] font-semibold underline underline-offset-2 flex items-center gap-1"
+            >
+              <span>Bounce Indianapolis</span>
+              <ExternalLink className="w-3 h-3" />
+            </a>
+          </div>
 
-                <div className="p-3 rounded-xl bg-[#FAF8F5] border border-stone-200">
-                  <span className="text-stone-500 block text-[11px]">Bag Keeper Add-on</span>
-                  <strong className="text-base font-bold text-stone-900 font-mono">+$5 / tote</strong>
-                  <span className="text-[10px] text-stone-500 block mt-0.5">Keep clear tote as souvenir</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Event Economics Model */}
-            <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200">
-              <div className="flex items-center justify-between text-xs font-bold text-stone-800 uppercase tracking-wider mb-2">
-                <span>Single Game Day Financial Simulation (6 Hours)</span>
-                <span className="text-emerald-700 font-mono font-bold">[PROJECTED RESULT]</span>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
-                <div>
-                  <span className="text-stone-500 block text-[11px]">Assumed Volume per Game</span>
-                  <span className="font-bold text-stone-900 text-sm">150 Bags + 30 Umbrellas</span>
-                  <p className="text-stone-500 text-[11px] mt-1">Based on 0.3% capture rate of 50,000 stadium attendees.</p>
-                </div>
-
-                <div>
-                  <span className="text-stone-500 block text-[11px]">Gross Revenue</span>
-                  <span className="font-bold text-stone-900 text-sm font-mono">$1,480 / event</span>
-                  <p className="text-stone-500 text-[11px] mt-1">(120 single @ $9) + (6 family @ $35) + (30 umbrellas @ $3) + (20 keepers @ $5).</p>
-                </div>
-
-                <div>
-                  <span className="text-stone-500 block text-[11px]">Operating Costs per Event</span>
-                  <span className="font-bold text-rose-700 text-sm font-mono">$342 / event</span>
-                  <p className="text-stone-500 text-[11px] mt-1">2 student staff ($192) + consumables ($55) + event insurance rider ($95).</p>
-                </div>
-              </div>
-
-              <div className="mt-3 pt-3 border-t border-stone-200 flex items-center justify-between text-xs sm:text-sm font-bold">
-                <span className="text-stone-800">Net Event Contribution Margin:</span>
-                <span className="text-emerald-700 font-mono text-base">+$1,138 / game (~77% Gross Margin)</span>
-              </div>
-            </div>
-
-            <p className="text-[11px] text-stone-400 mt-2">
-              Startup Capex is minimal: ~$1,200 for commercial canopy, wire racks, 200 regulation totes, and branding signage.
-            </p>
-          </section>
-
-          {/* =====================================================================
-              6. UNIQUE VALUE PROPOSITION
-              ===================================================================== */}
-          <section id="why-6" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  06
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Unique Value Proposition (UVP)
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">3:45 – 4:20</span>
-            </div>
-
-            {/* Core UVP Hero Statement */}
-            <div className="p-4 rounded-2xl bg-stone-900 text-white mb-5">
-              <span className="text-amber-400 text-xs font-bold uppercase tracking-wider block mb-1">
-                The Strongest Reason to Choose Hold My Bag
-              </span>
-              <p className="text-base sm:text-lg font-bold leading-snug">
-                "A guaranteed 60-second gate rescue that saves your game day or graduation without losing 45 minutes or surrendering your belongings."
-              </p>
-            </div>
-
-            {/* Alternatives Comparison Matrix */}
-            <div className="overflow-x-auto">
-              <table className="w-full text-xs text-left border-collapse">
-                <thead>
-                  <tr className="border-b border-stone-200 text-stone-500">
-                    <th className="py-2 pr-3 font-bold uppercase">Customer Option</th>
-                    <th className="py-2 px-3 font-bold uppercase">Time Lost</th>
-                    <th className="py-2 px-3 font-bold uppercase">Security & Risk</th>
-                    <th className="py-2 pl-3 font-bold uppercase">Total Cost / Outcome</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-stone-100 text-stone-700">
-                  <tr className="hover:bg-stone-50">
-                    <td className="py-2.5 pr-3 font-semibold text-stone-900">Walk Back to Car</td>
-                    <td className="py-2.5 px-3 text-rose-700 font-bold">40–50 mins lost</td>
-                    <td className="py-2.5 px-3">Vehicle locked</td>
-                    <td className="py-2.5 pl-3">Misses kickoff or graduation stage walk</td>
-                  </tr>
-                  <tr className="hover:bg-stone-50">
-                    <td className="py-2.5 pr-3 font-semibold text-stone-900">Stash in Campus Bushes</td>
-                    <td className="py-2.5 px-3">10 mins</td>
-                    <td className="py-2.5 px-3 text-rose-700 font-bold">High theft & weather risk</td>
-                    <td className="py-2.5 pl-3">Stolen purse or ruined electronics</td>
-                  </tr>
-                  <tr className="hover:bg-stone-50">
-                    <td className="py-2.5 pr-3 font-semibold text-stone-900">Throw in Gate Trash</td>
-                    <td className="py-2.5 px-3">1 min</td>
-                    <td className="py-2.5 px-3">Total loss</td>
-                    <td className="py-2.5 pl-3 text-rose-700 font-bold">Loses $50–$250 purse or umbrella</td>
-                  </tr>
-                  <tr className="bg-[#990000]/5 font-semibold text-stone-900 border-l-2 border-[#990000]">
-                    <td className="py-2.5 pr-3 pl-2 text-[#990000] font-bold">Hold My Bag Stand</td>
-                    <td className="py-2.5 px-3 text-emerald-700 font-bold">Under 90 seconds</td>
-                    <td className="py-2.5 px-3 text-emerald-700 font-bold">Tamper seal + photo custody</td>
-                    <td className="py-2.5 pl-3 text-emerald-700 font-bold">$9 · Seamless entry with clear bag</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-
-            <p className="text-xs text-stone-600 mt-3">
-              <strong>Why the difference matters:</strong> Visitors don't just buy bag storage—they buy peace of mind and reclaim their once-in-a-lifetime family memory.
-            </p>
-          </section>
-
-          {/* =====================================================================
-              7. PROJECTED IMPACT ON BLOOMINGTON
-              ===================================================================== */}
-          <section id="why-7" className="bg-white rounded-3xl p-6 sm:p-8 border border-stone-200 shadow-xs relative">
-            <div className="flex items-center justify-between gap-3 mb-4">
-              <div className="flex items-center gap-3">
-                <span className="w-8 h-8 rounded-xl bg-[#990000] text-white font-mono font-bold text-sm flex items-center justify-center shrink-0">
-                  07
-                </span>
-                <h2 className="text-xl sm:text-2xl font-bold text-stone-900 tracking-tight">
-                  Projected Impact on Bloomington
-                </h2>
-              </div>
-              <span className="text-xs font-semibold text-stone-400 hidden sm:inline">4:20 – 5:00</span>
-            </div>
-
-            {/* Stakeholder Impact Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6 text-xs">
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-                <span className="text-[10px] font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  1. Students
-                </span>
-                <h4 className="font-bold text-stone-900 text-sm mb-1.5">Flexible High-Wage Work</h4>
-                <p className="text-stone-600 leading-relaxed">
-                  Provides flexible game-day employment at $16/hr for IU undergraduates, while offering real entrepreneurial leadership experience for Kelley / KTP students.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-                <span className="text-[10px] font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  2. Visitors & Families
-                </span>
-                <h4 className="font-bold text-stone-900 text-sm mb-1.5">Zero-Stress Hospitality</h4>
-                <p className="text-stone-600 leading-relaxed">
-                  Eliminates gate hostility and family panic, ensuring elderly relatives and parents with young children enjoy Bloomington events seamlessly.
-                </p>
-              </div>
-
-              <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-stone-200">
-                <span className="text-[10px] font-bold text-[#990000] uppercase tracking-wider block mb-1">
-                  3. IU Athletics & Venues
-                </span>
-                <h4 className="font-bold text-stone-900 text-sm mb-1.5">Turnstile Throughput</h4>
-                <p className="text-stone-600 leading-relaxed">
-                  Provides gate security staff with an immediate, constructive solution to redirect rejected guests, speeding up overall stadium entry queues.
-                </p>
-              </div>
-            </div>
-
-            {/* Pilot Measurement Plan */}
-            <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200">
-              <div className="flex items-center justify-between text-xs font-bold text-stone-800 uppercase tracking-wider mb-2">
-                <span>Pilot Measurement Plan (3-Game Initial Test)</span>
-                <span className="text-[#990000] font-bold">[PROPOSED PARTNERSHIP]</span>
-              </div>
-              <p className="text-xs text-stone-600 mb-3">
-                Proposed guest services referral partnership with IU Athletics Event Operations and Commencement Steering Committee.
-              </p>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs">
-                <div className="p-2.5 rounded-xl bg-white border border-stone-200">
-                  <span className="text-stone-400 block text-[10px]">Volume Metric</span>
-                  <strong className="text-stone-900 font-bold block text-sm">100+ Bags</strong>
-                  <span className="text-stone-500 text-[10px]">Per pilot game</span>
-                </div>
-
-                <div className="p-2.5 rounded-xl bg-white border border-stone-200">
-                  <span className="text-stone-400 block text-[10px]">Time Saved Metric</span>
-                  <strong className="text-stone-900 font-bold block text-sm">35 Mins / Fan</strong>
-                  <span className="text-stone-500 text-[10px]">Vs. parking walk</span>
-                </div>
-
-                <div className="p-2.5 rounded-xl bg-white border border-stone-200">
-                  <span className="text-stone-400 block text-[10px]">Speed of Service</span>
-                  <strong className="text-stone-900 font-bold block text-sm">&lt;60 Seconds</strong>
-                  <span className="text-stone-500 text-[10px]">Intake & return time</span>
-                </div>
-
-                <div className="p-2.5 rounded-xl bg-white border border-stone-200">
-                  <span className="text-stone-400 block text-[10px]">Satisfaction</span>
-                  <strong className="text-stone-900 font-bold block text-sm">95%+ CSAT</strong>
-                  <span className="text-stone-500 text-[10px]">Net Promoter Score &gt; 80</span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          {/* Bottom Action Bar */}
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-[#990000] text-white shadow-md">
+          {/* Ending Pitch Sentence */}
+          <div className="mt-8 p-6 rounded-2xl bg-[#990000] text-white flex flex-col sm:flex-row items-center justify-between gap-4">
             <div>
-              <h3 className="text-xl font-bold tracking-tight">Ready to see Hold My Bag in action?</h3>
+              <h3 className="text-xl sm:text-2xl font-black tracking-tight">
+                “Help me find a partner to test one stand at one Bloomington game.”
+              </h3>
               <p className="text-xs sm:text-sm text-amber-100 mt-1">
-                Explore our live booking flow, digital claim barcode generator, and real-time bag tracker.
+                Prototype is ready for pilot testing with IU Athletics or a campus venue sponsor.
               </p>
             </div>
-            <div className="flex items-center gap-3 shrink-0">
-              <button
-                onClick={handlePrint}
-                className="h-11 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-semibold text-xs sm:text-sm transition-colors cursor-pointer border border-white/20 flex items-center gap-1.5"
-              >
-                <Printer className="w-4 h-4" />
-                <span>Print Pitch Brief</span>
-              </button>
-              <button
-                onClick={onTryDemo}
-                className="h-11 px-6 rounded-xl bg-white hover:bg-stone-100 text-[#990000] font-bold text-xs sm:text-sm transition-all shadow-sm flex items-center gap-1.5 cursor-pointer"
-              >
-                <Play className="w-4 h-4 fill-current" />
-                <span>Launch Demo</span>
-                <ArrowRight className="w-4 h-4" />
-              </button>
-            </div>
+
+            <a
+              href="mailto:hello@holdmybag-iu.com?subject=Hold%20My%20Bag%20Pilot%20Partnership"
+              className="h-11 px-5 rounded-xl bg-white hover:bg-stone-100 text-[#990000] font-bold text-xs sm:text-sm transition-colors flex items-center gap-1.5 shrink-0 cursor-pointer shadow-sm"
+            >
+              <span>Contact to Partner</span>
+              <ArrowRight className="w-4 h-4" />
+            </a>
           </div>
+        </section>
 
-        </main>
-      </div>
-
-      {/* =========================================================================
-          PRINT-ONLY VIEW: Strict 1-Page Typed Executive Summary for Pitch Briefing
-          ========================================================================= */}
-      <div className="hidden print:block p-6 max-w-[8.5in] mx-auto text-black bg-white font-sans text-[10.5pt] leading-tight">
-        {/* Print Header */}
-        <div className="border-b-2 border-[#990000] pb-2 mb-3 flex items-start justify-between">
-          <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-xl font-black tracking-tight text-[#990000]">
-                HOLD MY BAG
-              </h1>
-              <span className="text-xs font-bold text-stone-500 uppercase tracking-wider">
-                · Executive Pitch Summary (KTP Venture Pitch)
-              </span>
-            </div>
-            <p className="text-[9pt] text-stone-700 mt-0.5">
-              Indiana University Bloomington Campus Bag Swap & Secure Gate-Check Initiative
-            </p>
-          </div>
-          <div className="text-right text-[8.5pt] text-stone-600">
-            <span className="font-bold text-stone-900 block">Student-Run Business</span>
-            <span>hello@holdmybag-iu.com</span>
-          </div>
-        </div>
-
-        {/* 7 Numbered Points in Exact Required Order in Compact Executive Grid */}
-        <div className="space-y-2.5">
-          
-          {/* 1. Name and Concept */}
-          <div className="border border-stone-300 p-2 rounded bg-stone-50">
-            <div className="flex items-baseline justify-between">
-              <strong className="text-[10pt] font-black text-[#990000]">1. BUSINESS NAME AND CONCEPT</strong>
-              <span className="text-[8pt] text-stone-500 uppercase font-semibold">Initiative Concept</span>
-            </div>
-            <p className="mt-0.5 text-[9.5pt]">
-              <strong>Hold My Bag</strong> is a mobile stadium-gate bag check and loaner clear-bag service that rescues visitors, students, and families turned away by strict security policies outside Indiana University Bloomington athletic and commencement venues.
-            </p>
-          </div>
-
-          {/* 2. Problem and Opportunity */}
-          <div className="border border-stone-300 p-2 rounded">
-            <strong className="text-[10pt] font-black text-[#990000] block">2. PROBLEM AND OPPORTUNITY</strong>
-            <p className="text-[9pt] mt-0.5 text-stone-800">
-              <strong>Specific Bloomington Scenario:</strong> During Memorial Stadium game days (52,000+ fans) or Assembly Hall Commencement (17,000+ guests), out-of-town families arrive at gates with leather purses or diaper bags. IU strictly enforces a 12"×6"×12" clear-bag limit, but provides <em>zero</em> stadium lockers or storage due to liability. Guests face a punishing 20-30 minute walk back to distant Highway 45/46 or Tenth & Fee parking lots—missing kickoff or diploma walks. <strong>Opportunity:</strong> A pop-up stand 40 steps from turnstiles rescues guests at their moment of peak urgency.
-            </p>
-          </div>
-
-          {/* 3. Target Customer and Market */}
-          <div className="border border-stone-300 p-2 rounded">
-            <div className="flex items-baseline justify-between">
-              <strong className="text-[10pt] font-black text-[#990000]">3. TARGET CUSTOMER AND MARKET</strong>
-              <span className="text-[8pt] text-amber-800 font-bold bg-amber-100 px-1 rounded">[TO TEST IN PILOT]</span>
-            </div>
-            <p className="text-[9pt] mt-0.5 text-stone-800">
-              <strong>First Group:</strong> Visiting parents, alumni, and families attending Commencement and game days carrying standard bags, followed by students carrying backpacks. <strong>Why Bloomington:</strong> Highly concentrated sellout crowds (50,000+) paired with extreme parking distances create predictable captive demand. <strong>Pilot Hypotheses to Test:</strong> Walk-up conversion rate vs. advance web reservations; price elasticity between $7, $9, and $12; and return queue throughput.
-            </p>
-          </div>
-
-          {/* 4. Core Product / Service */}
-          <div className="border border-stone-300 p-2 rounded">
-            <strong className="text-[10pt] font-black text-[#990000] block">4. CORE PRODUCT OR SERVICE (4-STEP JOURNEY)</strong>
-            <div className="grid grid-cols-4 gap-2 mt-1 text-[8.5pt]">
-              <div className="bg-stone-50 p-1.5 rounded border border-stone-200">
-                <strong>1. Locate Stand:</strong> Walk up to branded canopy 40 steps outside gate turnstiles.
-              </div>
-              <div className="bg-stone-50 p-1.5 rounded border border-stone-200">
-                <strong>2. Swap & Loan:</strong> Move phone, wallet, keys & meds into our loaned 12"×6"×12" clear tote.
-              </div>
-              <div className="bg-stone-50 p-1.5 rounded border border-stone-200">
-                <strong>3. Seal & Hold:</strong> Bag is secured with a serial tamper zip tie, photo-logged, and given claim tag.
-              </div>
-              <div className="bg-stone-50 p-1.5 rounded border border-stone-200">
-                <strong>4. Post-Event Return:</strong> Show ID and claim tag; staff snips seal and returns personal bag in 30s.
-              </div>
-            </div>
-          </div>
-
-          {/* 5. Business Model */}
-          <div className="border border-stone-300 p-2 rounded">
-            <div className="flex items-baseline justify-between">
-              <strong className="text-[10pt] font-black text-[#990000]">5. BUSINESS MODEL & REVENUE ASSUMPTIONS</strong>
-              <span className="text-[8pt] text-stone-700 font-bold font-mono">[PROPOSED PRICING & RESULTS]</span>
-            </div>
-            <div className="grid grid-cols-3 gap-2 mt-1 text-[8.5pt]">
-              <div className="bg-stone-50 p-1.5 rounded">
-                <strong>Pricing Structure:</strong>
-                <div>• Single Swap & Hold: $9 / bag</div>
-                <div>• Family Pack: $35 (up to 5 bags)</div>
-                <div>• Umbrella Hold: $3 / umbrella</div>
-                <div>• Keep Clear Tote: +$5 add-on</div>
-              </div>
-              <div className="bg-stone-50 p-1.5 rounded">
-                <strong>Event Revenue (150 Bags):</strong>
-                <div>• 120 singles: $1,080</div>
-                <div>• 6 family packs: $210</div>
-                <div>• 30 umbrellas: $90</div>
-                <div>• 20 tote keepers: $100</div>
-                <div className="font-bold text-[#990000]">Gross: $1,480 / event</div>
-              </div>
-              <div className="bg-stone-50 p-1.5 rounded">
-                <strong>Event Costs & Margins:</strong>
-                <div>• 2 students (6h @ $16/h): $192</div>
-                <div>• Consumables & seals: $55</div>
-                <div>• Insurance rider: $95</div>
-                <div className="font-bold text-emerald-700">Net Profit: $1,138 (~77% margin)</div>
-              </div>
-            </div>
-          </div>
-
-          {/* 6. Unique Value Proposition */}
-          <div className="border border-stone-300 p-2 rounded">
-            <strong className="text-[10pt] font-black text-[#990000] block">6. UNIQUE VALUE PROPOSITION (UVP)</strong>
-            <p className="text-[9pt] mt-0.5 text-stone-800">
-              <strong>Strongest Reason:</strong> <em>"A guaranteed 60-second gate rescue saving your event without losing 45 minutes walking back or throwing away personal belongings."</em> Compared to alternatives—walking back to distant lots (losing 45 mins), hiding bags in bushes (high theft risk), or abandoning bags at turnstiles—Hold My Bag provides instant relief with tamper-seal insurance for only $9.
-            </p>
-          </div>
-
-          {/* 7. Projected Impact on Bloomington */}
-          <div className="border border-stone-300 p-2 rounded">
-            <div className="flex items-baseline justify-between">
-              <strong className="text-[10pt] font-black text-[#990000]">7. PROJECTED IMPACT ON BLOOMINGTON & PILOT METRICS</strong>
-              <span className="text-[8pt] text-[#990000] font-bold">[PROPOSED PARTNERSHIP]</span>
-            </div>
-            <p className="text-[9pt] mt-0.5 text-stone-800">
-              <strong>Community Benefits:</strong> Provides flexible game-day student employment ($16/hr); enhances visitor hospitality for Commencement families; speeds gate turnstile throughput for IU Athletics by eliminating guest conflict. <strong>Pilot Metrics:</strong> 1) Volume (100+ bags/game); 2) Time saved (35 mins/fan); 3) Speed (&lt;60s intake); 4) CSAT (&gt;95% satisfaction).
-            </p>
-          </div>
-
-        </div>
-
-        {/* Print Footer */}
-        <div className="mt-3 pt-2 border-t border-stone-300 flex items-center justify-between text-[8pt] text-stone-500">
-          <span>Prepared for KTP Pitch Presentation · Indiana University Bloomington</span>
-          <span>Interactive Demo Live at https://holdmybag-iu.com</span>
-        </div>
       </div>
     </div>
   );

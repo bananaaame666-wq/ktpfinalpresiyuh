@@ -21,7 +21,7 @@ export const Hero: React.FC<HeroProps> = ({ onOpenReserve, onOpenTracker, onSele
           <div className="flex items-center gap-2.5">
             <span className="w-2.5 h-2.5 rounded-full bg-[#990000] animate-pulse" />
             <p className="text-xs sm:text-sm text-stone-700">
-              <span className="font-bold text-stone-900">IU Bloomington Stand Active:</span> Memorial Stadium & Simon Skjodt Assembly Hall
+              <span className="font-bold text-stone-900">Proposed Pilot Concept:</span> Pop-up stand near Memorial Stadium & Simon Skjodt Assembly Hall
             </p>
           </div>
           <div className="flex items-center gap-2">

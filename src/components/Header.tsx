@@ -37,25 +37,8 @@ export const Header: React.FC<HeaderProps> = ({ activeTab, setActiveTab, onOpenR
 
   return (
     <>
-      {/* Top Banner: Authentic Student Venture Pitch Flag */}
-      <div className="print:hidden bg-[#800000] text-amber-100 text-xs py-1.5 px-4 font-medium tracking-tight">
-        <div className="max-w-6xl mx-auto flex items-center justify-between text-[11px] sm:text-xs">
-          <div className="flex items-center gap-1.5 truncate">
-            <span className="font-bold text-white uppercase tracking-wider text-[10px] bg-[#660000] px-1.5 py-0.5 rounded">Pitch Demo</span>
-            <span className="hidden sm:inline text-amber-200">·</span>
-            <span className="truncate">IU Bloomington Student Business · KTP Pitch Reference</span>
-          </div>
-          <button
-            onClick={() => handleNavClick('why-us')}
-            className="shrink-0 text-amber-200 hover:text-white underline underline-offset-2 font-semibold cursor-pointer ml-2"
-          >
-            {activeTab === 'why-us' ? 'Viewing: Why Us Pitch Brief' : 'Why Us (5-Min Pitch Reference) →'}
-          </button>
-        </div>
-      </div>
-
       {/* Main Navigation Bar complying with 3-zone contract */}
-      <header className="print:hidden sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200 shadow-xs">
+      <header className="sticky top-0 z-40 bg-[#FAF8F5]/95 backdrop-blur-md border-b border-stone-200 shadow-xs">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-8">
           {/* Zone 1: Brand Wordmark with clean bag icon */}
           <button
